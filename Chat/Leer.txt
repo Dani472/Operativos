@@ -2,3 +2,4 @@ Aun falta implementar.
 
 -Expulsar Usuario
 -Mejorar la forma en la que el server envia los mensajes
+-Se esta implementando Zumbidooo

@@ -1,5 +1,9 @@
+La carpeta chat contiene el codigo en NetBeans, La carpeta CodigoJava Tiene solo los archivos .java
+
 Aun falta implementar.
 
 -Expulsar Usuario
 -Mejorar la forma en la que el server envia los mensajes
--Se esta implementando Zumbidooo
+
+
+Se añadio zumbido pero en el momendo solo se ejecuta cuando la ventana esta en primer plano.

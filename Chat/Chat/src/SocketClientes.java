@@ -4,6 +4,7 @@ import java.text.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class SocketClientes extends javax.swing.JFrame {
 
@@ -29,6 +30,7 @@ public class SocketClientes extends javax.swing.JFrame {
         EnviarTextoCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Salir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +57,13 @@ public class SocketClientes extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Zumbido");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,11 +75,16 @@ public class SocketClientes extends javax.swing.JFrame {
                         .add(622, 622, 622)
                         .add(jLabel2))
                     .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel1)
-                            .add(EnviarTextoCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 545, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(EnviarTextoCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 545, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+                                .add(29, 29, 29)
+                                .add(jLabel1)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(jButton1)))
+                        .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(Salir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(Enviar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
@@ -89,7 +103,9 @@ public class SocketClientes extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(Enviar)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(Salir)))
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(Salir)
+                            .add(jButton1))))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jLabel2))
         );
@@ -114,6 +130,10 @@ public class SocketClientes extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SalirActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        EnviarMensaje("zumbbbb");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
     public  void EnviarMensaje(String Enviar){
         String recibido;
@@ -128,13 +148,26 @@ public class SocketClientes extends javax.swing.JFrame {
             dsalida = new DataOutputStream(osalida);
             ientrada = cliente.getInputStream();
             dentrada = new DataInputStream(ientrada);
-
+            recibido = dentrada.readUTF(); 
+           
+           
+             MensajeCompleto=TextoAreaCliente.getText();
+             MensajeCompleto=MensajeCompleto.replace("Servidor -> ***.\n","");
+             TextoAreaCliente.setText(MensajeCompleto+""+recibido +"\n");
+             dsalida.writeUTF(Enviar);
+             
+                     
             recibido = dentrada.readUTF();
-            MensajeCompleto=TextoAreaCliente.getText();
-            TextoAreaCliente.setText(MensajeCompleto+""+recibido +"\n");
-            dsalida.writeUTF(Enviar);
+            if(recibido=="zumbbbb") {
+                MensajeCompleto=TextoAreaCliente.getText();
+                TextoAreaCliente.setText(MensajeCompleto+""+"Has recibido un zumbidooooo" +"\n");
+                
+            }else{
+                MensajeCompleto=TextoAreaCliente.getText();
+                TextoAreaCliente.setText(MensajeCompleto+""+recibido +"\n");
+            }
+             
             dsalida.close();
-
             dentrada.close();
             cliente.close();
 
@@ -142,9 +175,33 @@ public class SocketClientes extends javax.swing.JFrame {
             System.err.println("Error: " + e);
         }
 
-    
     }
-
+    
+     public  void Zumbido() throws InterruptedException{
+        System.out.println("Esta sacuediendo la ventana");
+       
+        for(int i=0;i<5;i++){
+            Toolkit.getDefaultToolkit().beep();
+            Thread.sleep(50);
+            setLocation(300, 110);
+            Thread.sleep(50);
+            this.setLocationRelativeTo(null);
+            Thread.sleep(50);
+            setLocation(320, 130);
+            Thread.sleep(50);
+            this.setLocationRelativeTo(null);
+            Thread.sleep(50);
+            setLocation(340, 110);
+            Thread.sleep(50);
+            this.setLocationRelativeTo(null);
+            Thread.sleep(50);
+            setLocation(320, 90);
+            Thread.sleep(50);
+            this.setLocationRelativeTo(null);
+            Toolkit.getDefaultToolkit().beep(); 
+        }
+        this.setLocationRelativeTo(null);
+    }
     
     public static void main(String args[]) {
        SocketClientes Inicio=new SocketClientes();  
@@ -175,6 +232,7 @@ public class SocketClientes extends javax.swing.JFrame {
     private javax.swing.JTextField EnviarTextoCliente;
     private javax.swing.JButton Salir;
     private javax.swing.JTextArea TextoAreaCliente;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

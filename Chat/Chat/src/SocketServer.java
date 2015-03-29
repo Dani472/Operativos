@@ -1,3 +1,4 @@
+import java.awt.Toolkit;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import javax.swing.*;
 
 public class SocketServer extends javax.swing.JFrame {
 
-    String EnviarTexto="";
+    String EnviarTexto="NoHayNada.-.";
     
     public SocketServer() {
         initComponents();
@@ -16,7 +17,7 @@ public class SocketServer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    
     public SocketServer(int a){}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,6 +31,7 @@ public class SocketServer extends javax.swing.JFrame {
         EnviarMensajeServer = new javax.swing.JButton();
         TextoServer = new javax.swing.JTextField();
         Vef = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +64,13 @@ public class SocketServer extends javax.swing.JFrame {
         Vef.setText("        ");
         Vef.setEnabled(false);
 
+        jButton1.setText("Zumbido");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,9 +86,11 @@ public class SocketServer extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(ExpulsarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Vef)
-                .addGap(134, 134, 134)
+                .addGap(144, 144, 144)
                 .addComponent(Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -87,11 +98,13 @@ public class SocketServer extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(ExpulsarUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Limpiar)
-                    .addComponent(Vef))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(ExpulsarUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Limpiar)
+                        .addComponent(Vef)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -103,18 +116,24 @@ public class SocketServer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     private void EnviarMensajeServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarMensajeServerActionPerformed
        EnviarTexto=TextoServer.getText();
-       TextoServer.setText("");
-       
+       TextoServer.setText(""); 
     }//GEN-LAST:event_EnviarMensajeServerActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
         AreaTextoServer.setText("");
     }//GEN-LAST:event_LimpiarActionPerformed
-    
-    
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            EnviarTexto="zumbbbb";
+            Zumbido();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SocketServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void InicializarServidor(){
     int user=0;
@@ -134,8 +153,32 @@ public class SocketServer extends javax.swing.JFrame {
         } catch (IOException excepcion) {
             System.out.println(excepcion);
         }
+        
     }
-
+    
+    public  void Zumbido() throws InterruptedException{
+        System.out.println("Esta sacuediendo la ventana");
+        
+        for(int i=0;i<5;i++){
+            Toolkit.getDefaultToolkit().beep();
+            Thread.sleep(50);
+            setLocation(300, 110);
+            Thread.sleep(50);
+            Thread.sleep(50);
+            setLocation(320, 130);
+            Thread.sleep(50);
+            Thread.sleep(50);
+            setLocation(340, 110);
+            Thread.sleep(50);
+            Thread.sleep(50);
+            setLocation(320, 90);
+            Thread.sleep(50);
+            Toolkit.getDefaultToolkit().beep(); 
+        }
+        this.setLocationRelativeTo(null);
+      
+    }
+ 
     public static void main(String args[]) {
         SocketServer Inicio=new SocketServer();
        try {
@@ -163,6 +206,7 @@ public class SocketServer extends javax.swing.JFrame {
     private javax.swing.JButton Limpiar;
     public static javax.swing.JTextField TextoServer;
     public javax.swing.JLabel Vef;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

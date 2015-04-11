@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".principal"
+    android:id="@+id/LAAYOUT_START"
+    >
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/IP"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Escribe la dirección IP"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="192.168.0.29" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conectar"
+        android:id="@+id/BOTON"
+        android:onClick="conectar"
+        android:layout_below="@+id/IP"
+        android:layout_alignParentLeft="true"
+
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escribe la dirección IP:"
+        android:id="@+id/START_TEXTO"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/IP"
+        android:layout_alignEnd="@+id/IP" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:id="@+id/PUERTO"
+        android:hint="Escribe el puerto"
+        android:layout_below="@+id/IP"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/IP"
+        android:layout_alignEnd="@+id/IP"
+        android:text="3000" />
+
+
+
+</RelativeLayout>
